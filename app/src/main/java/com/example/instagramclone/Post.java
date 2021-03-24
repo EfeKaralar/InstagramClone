@@ -5,11 +5,16 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @ParseClassName("Post")
 public class Post extends ParseObject{
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
+    public static final String KEY_CREATED_KEY = "createdAt";
 
     public String getDescription(){
         return getString(KEY_DESCRIPTION);
@@ -29,4 +34,8 @@ public class Post extends ParseObject{
     public void setUser(ParseUser parseUser){
         put(KEY_USER, parseUser);
     }
+    public String getPostCreationDate(){
+        SimpleDateFormat myFormatObj = new SimpleDateFormat("MM/dd/yyyy");
+        String date = myFormatObj.format(getCreatedAt());
+        return date;}
 }

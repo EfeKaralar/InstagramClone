@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +18,11 @@ import com.example.instagramclone.Post;
 import com.example.instagramclone.PostsAdapter;
 import com.example.instagramclone.R;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ public class PostsFragment extends Fragment {
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
+    private SwipeRefreshLayout swipeContainer;
 
     public PostsFragment() {
         // Required empty public constructor
@@ -46,6 +51,7 @@ public class PostsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         allPosts = new ArrayList<>();
         Log.d(TAG, "onViewCreated: ");
 
@@ -59,6 +65,27 @@ public class PostsFragment extends Fragment {
         // 4. set the layout manager on recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                allPosts = new ArrayList<>();
+                adapter = new PostsAdapter(getContext(), allPosts);
+                rvPosts.setAdapter(adapter);
+                rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+                // Make sure you call swipeContainer.setRefreshing(false)
+                swipeContainer.setRefreshing(false);
+                // once the network request has completed successfully.
+                queryPosts();
+            }
+        });
+        // Configure the refreshing colors
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
 

@@ -50,4 +50,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     // SwipeRefreshLayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    // Infinite Scrolling
+    implementation "androidx.paging:paging-runtime:2.1.2"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.3.0"
 }

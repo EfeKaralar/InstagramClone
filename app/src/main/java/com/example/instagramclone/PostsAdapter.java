@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +32,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
     
+    // Add a list of items -- change to type used
+    public void addAll(PagedList<Post> list) {
+        posts.addAll(list);
+        notifyDataSetChanged();
+    }
     // Add a list of items -- change to type used
     public void addAll(List<Post> list) {
         posts.addAll(list);

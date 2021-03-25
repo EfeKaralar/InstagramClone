@@ -5,10 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.paging.LivePagedListBuilder;
-import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -19,20 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.instagramclone.EndlessRecyclerViewScrollListener;
-import com.example.instagramclone.ParseDataSourceFactory;
-import com.example.instagramclone.Post;
+import com.example.instagramclone.models.Post;
 import com.example.instagramclone.PostsAdapter;
 import com.example.instagramclone.R;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * A simple {@link Fragment} subclass.

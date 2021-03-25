@@ -53,4 +53,7 @@ dependencies {
     // Infinite Scrolling
     implementation "androidx.paging:paging-runtime:2.1.2"
     implementation "androidx.lifecycle:lifecycle-livedata:2.3.0"
+    // Parceller
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
 }

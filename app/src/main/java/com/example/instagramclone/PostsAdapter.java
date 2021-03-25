@@ -1,19 +1,27 @@
 package com.example.instagramclone;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramclone.models.Post;
 import com.parse.ParseFile;
+
+import org.parceler.Parcel;
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -67,6 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         TextView tvDate;
         ImageView ivImage;
         TextView tvDescription;
+        RelativeLayout container;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -74,6 +83,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDate = itemView.findViewById(R.id.tvDate);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            container = itemView.findViewById(R.id.rlItemContainer);
         }
 
         public void bind(Post post) {
@@ -87,7 +97,24 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             }
 
+            // 1. Register click listener on the whole row
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*
 
+                    // 2. Navigate to a new activity
+                    Intent i =new Intent(context, DetailActivity.class);
+                    i.putExtra("post", Parcels.wrap(post));
+                    Pair<View, String> p1 = Pair.create((View) tvUsername, "username");
+                    Pair<View, String> p2 = Pair.create((View) ivImage, "image");
+                    ActivityOptionsCompat options = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation((Activity) context, p1, p2);
+                    context.startActivity(i, options.toBundle());
+
+                     */
+                }
+            });
         }
     }
 }

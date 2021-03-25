@@ -1,10 +1,9 @@
 package com.example.instagramclone;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.paging.PositionalDataSource;
 
+import com.example.instagramclone.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
